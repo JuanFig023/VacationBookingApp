@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -63,5 +64,50 @@ class UserController extends Controller
         $user->delete();
     
         return response()->json(null, 204);
+    }
+    
+    public function login(Request $request) 
+    {
+        $validatedData = $request->validate([
+        'email' => 'required|string|email|max:255',
+        'password' => 'required|string|min:8',
+    ]);
+
+        $user = User::where('email', $validatedData['email'])->first();
+        if ($user && Hash::check($validatedData['password'], $user->password)) {
+        $user-> status = 1; // Set status to true (logged in)
+        $user->save();
+        return response()->json(['success' => true, 'user' => $user], 200);
+        } else {
+        return response()->json(['success' => false], 401);
+        }
+    }
+
+    public function register(Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'status' => 0, // Set status to false (logged out)
+        ]);
+    
+        return response()->json(['success' => true, 'user' => $user], 201);
+    }
+
+    public function logout(Request $request) {
+        $user = User::find($request->user()->id);
+        if ($user) {
+            $user->status = 0; // Set status to false (logged out)
+            $user->save();
+            return response()->json(['success' => true], 200);
+        } else {
+            return response()->json(['success' => false], 401);
+        }
     }
 }

@@ -12,5 +12,3 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('/vacationpackages', VacationPackageController::class);
-Route::apiResource('/users', UserController::class);
-Route::apiResource('/bookings', BookingController::class);

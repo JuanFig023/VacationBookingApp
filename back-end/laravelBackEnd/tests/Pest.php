@@ -10,10 +10,10 @@
 | need to change it using the "pest()" function to bind a different classes or traits.
 |
 */
-
+use Tests\TestCase;
 pest()->extend(Tests\TestCase::class)
  // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
