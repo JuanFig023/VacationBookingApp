@@ -1,0 +1,44 @@
+.vacation-main {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+    
+.vacation-title {
+    font-size: 2.5rem;
+    color: #343a40;
+}
+    
+.vacation-description {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+    
+.vacation-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+    
+.vacation-card {
+    transition: transform 0.3s;
+}
+    
+.vacation-card:hover {
+    transform: scale(1.05);
+}
+
+.vacation-image{
+    height: 200px;
+    object-fit: cover;
+}
+    
+.view-details-button {
+    background-color: #007bff;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+    
+.view-details-button:hover {
+    background-color: #0056b3;
+}
+    

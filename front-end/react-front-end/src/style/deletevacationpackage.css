@@ -1,0 +1,12 @@
+.delete-vacation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
+.delete-vacation-container .card {
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+    
+    
